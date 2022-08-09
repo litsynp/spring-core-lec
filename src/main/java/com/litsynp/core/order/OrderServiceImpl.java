@@ -1,5 +1,6 @@
 package com.litsynp.core.order;
 
+import com.litsynp.core.annotation.MainDiscountPolicy;
 import com.litsynp.core.discount.DiscountPolicy;
 import com.litsynp.core.member.Member;
 import com.litsynp.core.member.MemberRepository;
@@ -19,7 +20,8 @@ public class OrderServiceImpl implements OrderService {
     // 3. @Primary로 우선순위를 지정한다 (가장 많이 사용됨) e.g., Main DB, Secondary DB
     // => 우선 순위를 @Primary로 지정하고, 서브가 필요할 때 @Qualifer를 쓰면 된다.
     // * 둘 다 붙었을 때 우선순위는 Qualifer > Primary.
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    // * Qualifier을 쓰고 싶을 때 직접 annotation을 만들어줄 수 있다.
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
